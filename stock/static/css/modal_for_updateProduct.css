@@ -1,0 +1,19 @@
+.update_Product{
+    background-color: lightblue; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px solid white;
+    margin-top: 1rem;
+    padding: .3rem;
+    cursor: pointer;
+}
+.text{
+    background-color: lightblue;
+    border: none!important;
+    border-radius: none!important;
+    padding: .3rem;
+    border-radius: 10px solid white;
+    
+   
+}

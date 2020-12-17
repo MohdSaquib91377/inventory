@@ -1,0 +1,42 @@
+.label_for_CU{
+background-color: lightblue; 
+padding: .5rem;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.label_for_CU >p{
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0%;
+}
+.Create_product{
+    background-color: lightblue; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px solid white;
+    margin-top: 1rem;
+    padding: .3rem;
+    cursor: pointer;
+}
+
+.new_supplier{
+    background-color: lightblue; 
+    display: flex;  
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px solid white;
+    margin-top: 1rem;
+    padding: .3rem;
+    cursor: pointer;
+}
+.text{
+    background-color: lightblue;
+    border: none!important;
+    border-radius: none!important;
+    padding: .3rem;
+    border-radius: 10px solid white;
+    
+   
+}
