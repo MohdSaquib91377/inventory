@@ -53,7 +53,7 @@
                                  {{item.supplier.contact}}
                              </td>
                              <td>
-                                 <a href="#"  class="update" data-pk="{{item.pk}}" >
+                                 <a href="#"  class="update_return" data-pk="{{item.pk}}" >
                                     Edit
                                  </a>
                              </td>
@@ -64,28 +64,23 @@
         {% endfor %}
     </tbody>
 </table>
-
+    
+<div  class="container__right" id="container__right">
+                    
+    {% include 'dashboard/modal_for_CreateReturnProduct.html'%}
                
-<div  class="container__right" id="container__right">               
-    {% block right%}
-    {% include 'dashboard/modal_for_createProduct.html'%}
-
-{% endblock %}
-</div>
-
-
+</div> 
 <script>
- 
-    $('.update').click(function(){
-        console.log('update');
+    $('.update_return').click(function(){
+   
         $.ajax({
-    url:'/dashboard/product/update/',
+    url:'/dashboard/product/return/update',
     type:'get',
     data:{'id':$(this).attr('data-pk')},
     dataType:'json',
     success:function(data){
         console.log(data);
-        document.getElementById('container__right').innerHTML=data.modal_for_updateProduct
+        document.getElementById('container__right').innerHTML=data.modal_for_UpdateReturnProduct
         document.getElementById('product').value=data.data.title
         document.getElementById('price').value=data.data.price
         document.getElementById('quantity').value=data.data.quantity
@@ -95,13 +90,7 @@
         document.getElementById('pk').value=data.data.pk   
     }
 })
-    })   
-  
-  var supplier='{{suppliers}}'
-
-  console.log(supplier);
-    
-    // localStorage.setItem('data', suppliers);
-    
+    })
 </script>
+
 {% endblock %}

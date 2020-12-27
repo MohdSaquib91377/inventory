@@ -1,0 +1,79 @@
+{% extends 'dashboard/main.html'%}
+{% block body%}
+
+<table class="table" id="tb">
+    <tbody class="table__body">
+        <thead class="table__heading">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Conatct
+                </th>
+                <th>
+                    Address
+                </th>
+               
+                <th>
+                    Edit</th>
+                
+                <th>Delete</th>
+            </tr>
+           
+        </thead>
+
+        {% for cusstomer in customers%}
+        <tr>
+
+            <td>
+                {{cusstomer.name}}
+                 </td>
+                 <td>
+                    {{cusstomer.email}}
+                </td>
+                     <td>
+                        {{cusstomer.contact}}
+                    </td>
+                         <td>
+                            {{cusstomer.address}}
+                        </td>
+                             <td>
+                                 <a href="#"  class="customer_update" data-pk="{{cusstomer.pk}}" >
+                                    Edit
+                                 </a>
+                             </td>
+                             <td>
+                                 <span class="fa fa-arow" data-pk={{custmer.pk}}>Delete</span>
+                             </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+<div  class="container__right" id="container__right">               
+    {% include 'dashboard/modal_for_createCustomer.html'%}
+</div> 
+<script>
+    $(function(){
+        $('.customer_update').click(function(){
+            var pk=$(this).attr('data-pk')
+            $.ajax({
+                url:'/dashboard/customer/update/',
+                type:'get',
+                data:{'pk':pk},
+                dataType:'json',
+                success:function(response){
+                    document.getElementById('container__right').innerHTML=response.modal_for_updateCustomer
+
+                }
+            })
+        })
+    })
+</script>
+
+{% endblock %}

@@ -1,7 +1,7 @@
 <div class="label_for_CU">
-    <p>Create/Update Records</p>
+    <p>Returns Product</p>
 </div>
-<form action="{% url 'create'%}" method="POST" class="form">
+<form action="{% url 'return'%}" method="POST" >
     {% csrf_token %}
 <div class="form-group">  
     <label for="product">Product Name</label>
@@ -15,14 +15,14 @@
         <select  id="selected_supplier" class="form-control" name="selected_supplier">
             <option value="none" selected='selected'>--select--</option>
             {% for read in suppliers%}
-            <option value="{{read.name}}">{{read.name}}</option>
+            <option value="{{read.name}}">{{read.name}}}</option>
            {% endfor %}
         </select>
         
     </div>
     
       <div class="new_supplier" id="new_supplier">
-        <button class="text" id="tag">Add</button>
+        <button class="text" id="tag">Add Suppliers</button>
     </div>
       <div class="new_supplier_items">
         <label for="suppliers">supplier</label>
@@ -32,8 +32,8 @@
         <label for="contact" class="contact">Contact</label>
         <input type="text" name="contact"  class="contact form-control " id="contact">
       </div>
-        <div class="Create_product">
-            <button class="text">Create</button>
+        <div class="return_product">
+            <button class="return_product_text">Return</button>
         </div>
      
     
@@ -41,7 +41,6 @@
 </div>
    
 </form>
-
 <script>
   $(function(){
 

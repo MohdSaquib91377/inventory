@@ -1,0 +1,37 @@
+
+<div class="label_for_CU">
+    <p>Create Sale</p>
+</div>
+<form action="">
+    <label for="product">product</label>
+    <select  id="selected_product" class="form-control" name="selected_product">
+        <option value="none" selected='selected'>--select--</option>
+        {% for read in products%}
+        <option value="{{read.title}}">{{read.title}}</option>
+       {% endfor %}
+    </select>
+    <label for="quantity">quantity</label>
+    <input type="text" class="form-control">
+    
+    <label for="customer">customer</label>
+    <select  id="selected_customer" class="form-control" name="selected_customer">
+        <option value="none" selected='selected'>--select--</option>
+        {% for read in customers%}
+        <option value="{{read.name}}">{{read.name}}</option>
+       {% endfor %}
+    </select>
+    
+    <div class="return_product">
+        <button class="return_product_text">Create</button>
+    </div>
+</form>
+<script>
+   $(function(){
+       $('#selected_product').click(function(){
+        var name=$('#selected_product').val()
+        {{'get_sum_of_quantity(name)'}}
+    
+       })
+      
+   })
+</script>

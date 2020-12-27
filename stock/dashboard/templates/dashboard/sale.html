@@ -15,13 +15,16 @@
                     Quantity
                 </th>
                 <th>
-                    Supplier
+                    Customer
                 </th>
                 <th>
                     Address
                 </th>
                 <th>
-                    contact 
+                    Contact 
+                </th>
+                <th>
+                    Email
                 </th>
                 <th>
                     Edit</th>
@@ -64,44 +67,13 @@
         {% endfor %}
     </tbody>
 </table>
-
-               
-<div  class="container__right" id="container__right">               
-    {% block right%}
-    {% include 'dashboard/modal_for_createProduct.html'%}
-
-{% endblock %}
-</div>
+<div  class="container__right" id="container__right">
+                    
+{% include 'dashboard/modal_for_createSale.html'%}               
+</div> 
 
 
 <script>
  
-    $('.update').click(function(){
-        console.log('update');
-        $.ajax({
-    url:'/dashboard/product/update/',
-    type:'get',
-    data:{'id':$(this).attr('data-pk')},
-    dataType:'json',
-    success:function(data){
-        console.log(data);
-        document.getElementById('container__right').innerHTML=data.modal_for_updateProduct
-        document.getElementById('product').value=data.data.title
-        document.getElementById('price').value=data.data.price
-        document.getElementById('quantity').value=data.data.quantity
-        document.getElementById('supplier').value=data.data.supplier
-        document.getElementById('address').value=data.data.address
-        document.getElementById('contact').value=data.data.contact    
-        document.getElementById('pk').value=data.data.pk   
-    }
-})
-    })   
-  
-  var supplier='{{suppliers}}'
-
-  console.log(supplier);
-    
-    // localStorage.setItem('data', suppliers);
-    
 </script>
 {% endblock %}

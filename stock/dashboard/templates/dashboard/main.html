@@ -10,6 +10,10 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/product.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/modal_for_returnProduct.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/modal_for_UpdateReturnProduct.css' %}">
+
+    
     <link rel="stylesheet" type="text/css" href="{% static 'css/modal_for_createProduct.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/modal_for_updateProduct.css' %}">
     <link rel="stylesheet"  href="{% static 'bootstrap/css/bootstrap.min.css' %}">
@@ -22,7 +26,9 @@
     <script src="{% static 'js/modal_for_createProduct.js' %}"></script>
     <script src="{% static 'js/product.js' %}"></script>
 <script>
-    function getToken(name) {
+    $(function(){
+        
+        function getToken(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
         const cookies = document.cookie.split(';');
@@ -38,12 +44,14 @@
     return cookieValue;
 }
 const csrftoken = getToken('csrftoken');
-</script>
+
+    })
+    </script>
 </head>
 <body> 
  
     <!-- navbar -->
-    {{suppliers}}
+   
 <div class="navbar">
     <h3>navbar</h3>
 </div>
@@ -61,18 +69,21 @@ const csrftoken = getToken('csrftoken');
                         <a href="{% url 'product' %}">Products</a>
                     </li>
                     <li>
-                        <a href="">PurchaseReturn</a>
+                        <a href="{% url 'return' %}">PurchaseReturn</a>
                     </li>
                     <li>
-                        <a href="">Sales</a>
+                        <a href="{% url 'sale' %}">Sales</a>
                     </li>
                     <li>
                         <a href="">SalesReturn</a>
                     </li>
+                    <li>
+                        <a href="{% url 'customers'%}">Customers</a>
+                    </li>
                 </ul>
                 </div>
              
-                <div class="container__body d-flex" >
+                <div class="container__body d-flex" style="width: 100%;">
                     {% block body%}
     
                     {% endblock %}
