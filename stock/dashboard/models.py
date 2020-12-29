@@ -24,8 +24,8 @@ class Supplier(models.Model):
 
 class Supplied(models.Model):
     quantity=models.IntegerField(default=0)
-    product=models.ForeignKey('Product',related_name='quantity',on_delete=models.SET_NULL,null=True)
-    supplier=models.ForeignKey('Supplier',related_name='quantity',on_delete=models.SET_NULL,null=True)
+    product=models.ForeignKey('Product',related_name='supplied',on_delete=models.SET_NULL,null=True)
+    supplier=models.ForeignKey('Supplier',related_name='supplied',on_delete=models.SET_NULL,null=True)
     crated_at=models.DateTimeField(auto_now_add=True)
 
 
@@ -35,9 +35,7 @@ class Supplied(models.Model):
     def __str__(self):
         return '%s | %s | %s' %(self.quantity,self.product.title,self.supplier.name)
 
-    @property
-    def get_sum_of_quantity(name):
-        print(name)
+    
 class PurchaseReturned(models.Model):
     product=models.ForeignKey('Product',on_delete=models.SET_NULL,null=True)
     supplier=models.ForeignKey('Supplier',on_delete=models.SET_NULL,null=True)

@@ -34,7 +34,7 @@
            
         </thead>
 
-        {% for item in items%}
+        {% for item in sales%}
         <tr>
 
             <td>
@@ -47,13 +47,16 @@
                         {{item.quantity}}
                          </td>
                          <td>
-                            {{item.supplier.name}}
+                            {{item.customer.name}}
                              </td>
                              <td>
-                                 {{item.supplier.address}}
+                                 {{item.customer.address}}
                              </td>
                              <td>
-                                 {{item.supplier.contact}}
+                                 {{item.customer.contact}}
+                             </td>
+                             <td>
+                                 {{item.customer.email}}
                              </td>
                              <td>
                                  <a href="#"  class="update" data-pk="{{item.pk}}" >
@@ -68,7 +71,7 @@
     </tbody>
 </table>
 <div  class="container__right" id="container__right">
-                    
+
 {% include 'dashboard/modal_for_createSale.html'%}               
 </div> 
 

@@ -24,5 +24,6 @@ urlpatterns = [
     path('product/return/update',views.update_retured_product,name='return__update'),
     path('customers/',views.createCustomer,name='customers'),
     path('customer/update/',views.cutomer_update,name='customer_update'),
+    path('sumOfQuantity/',views.get_sum_of_quantity,name='sumOfQuantity'),
     path('sale/',views.sale,name='sale')
 ]

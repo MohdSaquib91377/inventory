@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import JsonResponse
-from.models import Product,Supplier,Supplied,PurchaseReturned,Customer
+from.models import Product,Supplier,Supplied,PurchaseReturned,Customer,Sale
 from django.template.loader import render_to_string
 # Operation Perform on Product
 def dashboard(request):
@@ -225,7 +225,29 @@ def cutomer_update(request):
         print(error)
 
 
+def get_sum_of_quantity(request):
+    quantity_sum=''
+    try:
+        name=request.GET.get('product')
+        product__obj=Product.objects.get(title=name)
+        temp=product__obj.supplied.all()
+        quantity_sum=sum([read.quantity for read in temp])
+       
+        
+    except Exception as error:
+        print(error)
+    return JsonResponse({'quantity':quantity_sum})
+
 def sale(request):
+    if request.method=='POST':
+        product=request.POST['selected_product']
+        quantity=request.POST['quantity']
+        customer=request.POST['selected_customer']
+        product__obj=Product.objects.get(title=product)
+        customer__obj=Customer.objects.get(name=customer)
+        sale__obj=Sale(product=product__obj,customer=customer__obj,quantity=quantity)
+        sale__obj.save()
     product__obj=Product.objects.all()
     customer__obj=Customer.objects.all()
-    return render(request,'dashboard/sale.html',context={'products':product__obj,'customers':customer__obj})
+    sale__obj=Sale.objects.all()
+    return render(request,'dashboard/sale.html',context={'sales':sale__obj,'products':product__obj,'customers':customer__obj})

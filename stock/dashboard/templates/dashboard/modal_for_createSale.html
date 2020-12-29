@@ -2,7 +2,8 @@
 <div class="label_for_CU">
     <p>Create Sale</p>
 </div>
-<form action="">
+<form action="{% url 'sale' %}" method="POST">
+    {% csrf_token %}
     <label for="product">product</label>
     <select  id="selected_product" class="form-control" name="selected_product">
         <option value="none" selected='selected'>--select--</option>
@@ -11,7 +12,7 @@
        {% endfor %}
     </select>
     <label for="quantity">quantity</label>
-    <input type="text" class="form-control">
+    <input type="text" class="form-control" id="quantity" name="quantity">
     
     <label for="customer">customer</label>
     <select  id="selected_customer" class="form-control" name="selected_customer">
@@ -29,7 +30,15 @@
    $(function(){
        $('#selected_product').click(function(){
         var name=$('#selected_product').val()
-        {{'get_sum_of_quantity(name)'}}
+        $.ajax({
+            url:'/dashboard/sumOfQuantity/',
+            type:'get',
+            data:{'product':name},
+            dataType:'json',
+            success:function(response){
+                document.getElementById('quantity').value=response.quantity
+            }
+        })
     
        })
       
