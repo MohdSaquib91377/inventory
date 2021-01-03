@@ -11,6 +11,10 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def convert_product_into_string(self):
+        return str(self.title)
+
 class Supplier(models.Model):
     name=models.CharField(max_length=64)
     contact=models.IntegerField()
@@ -21,7 +25,11 @@ class Supplier(models.Model):
 
     def __str__(self):
         return self.name
-
+ 
+    @property
+    def convert_supplier_into_string(self):
+        return str(self.name)
+        
 class Supplied(models.Model):
     quantity=models.IntegerField(default=0)
     product=models.ForeignKey('Product',related_name='supplied',on_delete=models.SET_NULL,null=True)
@@ -35,7 +43,7 @@ class Supplied(models.Model):
     def __str__(self):
         return '%s | %s | %s' %(self.quantity,self.product.title,self.supplier.name)
 
-    
+   
 class PurchaseReturned(models.Model):
     product=models.ForeignKey('Product',on_delete=models.SET_NULL,null=True)
     supplier=models.ForeignKey('Supplier',on_delete=models.SET_NULL,null=True)
@@ -61,6 +69,10 @@ class Customer(models.Model):
     def __str__(self):
         return '%s' %(self.name)
 
+    @property
+    def convert_customer_into_string(self):
+        return str(self.name)
+
 class Sale(models.Model):
     product=models.ForeignKey('Product',on_delete=models.SET_NULL,null=True)
     customer=models.ForeignKey('Customer',on_delete=models.SET_NULL,null=True)
@@ -73,3 +85,14 @@ class Sale(models.Model):
     def __str__(self):
         return '%s | %s | %s' %(self.product.title,self.customer.name,self.quantity)
 
+class SaleReturn(models.Model):
+    product=models.ForeignKey('Product',on_delete=models.SET_NULL,null=True)
+    customer=models.ForeignKey('Customer',on_delete=models.SET_NULL,null=True)
+    quantity=models.IntegerField()
+    crated_at=models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering=['-id']
+
+    def __str__(self):
+        return '%s | %s | %s' %(self.product.title,self.customer.name,self.quantity)

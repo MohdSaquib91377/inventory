@@ -1,0 +1,8 @@
+.product__info{
+    display: flex;
+   
+}
+.supplier__info{
+    display: flex;
+    width: 100%;
+}

@@ -12,7 +12,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/product.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/modal_for_returnProduct.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/modal_for_UpdateReturnProduct.css' %}">
-
+    <link rel="stylesheet" type="text/css" href="{% static 'css/modal_for_createSale.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/purchaseProduct.css' %}">
     
     <link rel="stylesheet" type="text/css" href="{% static 'css/modal_for_createProduct.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/modal_for_updateProduct.css' %}">
@@ -69,21 +70,28 @@ const csrftoken = getToken('csrftoken');
                         <a href="{% url 'product' %}">Products</a>
                     </li>
                     <li>
-                        <a href="{% url 'return' %}">PurchaseReturn</a>
+                        <a href="{% url 'suppliers'%}">Supplier</a>
+                    </li>
+                    <li><a href="{% url 'purchase_product'%}">Purchase</a></li>
+                    <li>
+                        <a href="{% url 'purchase_return'%}">PurchaseReturn</a>
                     </li>
                     <li>
                         <a href="{% url 'sale' %}">Sales</a>
                     </li>
                     <li>
-                        <a href="">SalesReturn</a>
+                        <a href="{% url 'salesReturn' %}">SalesReturn</a>
                     </li>
                     <li>
                         <a href="{% url 'customers'%}">Customers</a>
                     </li>
+                    <li>
+                        <a href="#">Stock</a>
+                    </li>
                 </ul>
                 </div>
              
-                <div class="container__body d-flex" style="width: 100%;">
+                <div class="container__body" style="display: flex;justify-content: space-evenly;width: 100%;">
                     {% block body%}
     
                     {% endblock %}

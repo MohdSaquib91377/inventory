@@ -1,0 +1,41 @@
+
+<div class="label_for_CU">
+    <p>Update Sale Return</p>
+</div>
+
+
+<form action="{% url 'update_sale_return' %}" method="POST">
+    {% csrf_token %}
+    <label for="product">product</label>
+    <select  id="selected_product" class="form-control" name="selected_product">
+        <option value="none">--select--</option>
+        {% for read in products%}
+        
+        {% if read.title == salesReturn.product.convert_product_into_string %}
+        <option value="{{read.title}}" selected="selected">{{read.title}}</option>
+        {% else %}
+        <option value="{{read.title}}">{{read.title}}</option>
+        {% endif %}
+       {% endfor %}
+    </select>
+    <label for="quantity">quantity</label>
+    <input type="text" class="form-control" id="quantity" name="quantity" value="{{salesReturn.quantity}}">
+    
+    <label for="customer">customer</label>
+    <select  id="selected_customer" class="form-control" name="selected_customer">
+        <option value="none">--select--</option>
+        {% for read in customers%} 
+        {% if read.name == salesReturn.customer.convert_customer_into_string %} 
+        <option value="{{read.name}}" selected='selected'>{{read.name}}</option>
+        {% else %}
+        <option value="{{read.name}}" >{{read.name}}</option>
+
+        {% endif %}
+       {% endfor %}
+    </select>
+    
+    <input type="hidden" value="{{salesReturn.pk}}" name="pk">
+    <div class="return_product">
+        <button class="return_product_text">Update</button>
+    </div>
+</form>

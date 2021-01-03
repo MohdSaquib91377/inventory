@@ -1,42 +1,40 @@
 
 <div class="label_for_CU">
-    <p>Update Return Product</p>
-  </div>
-  <form action="{% url 'return__update' %}" method="POST">
+    <p>Create Purchase</p>
+</div>
+<form action="{% url 'purchase_product' %}" method="POST">
     {% csrf_token %}
     <label for="product">product</label>
     <div class="product__info">
         <div class="supplier__info">
+         
             <select  id="selected_product" class="form-control" name="selected_product">
                 <option value="none" selected='selected'>--select--</option>
                 {% for read in products%}
-                {% if read.title == items.product.convert_product_into_string%}
-                <option value="{{read.title}}" selected="selecetd">{{read.title}}</option>
-                {% else %}
-                <option value="{{read.title}}" >{{read.title}}</option>
-                {% endif %}
+                <option value="{{read.title}}">{{read.title}}</option>
                {% endfor %}
             </select>
-        </div>   
-        <div class="customer__add">
-            <a class="customer__text" href="{% url 'product'%}">+</a>     
+      
         </div>
-          
+       
+            
+        <div class="customer__add">
+            <a class="customer__text" href="{% url 'product'%}">+</a>
+            
+        </div>
+       
+      
     </div>
     <label for="quantity">quantity</label>
-    <input type="text" class="form-control" id="quantity" name="quantity" value="{{items.quantity}}">
+    <input type="text" class="form-control" id="quantity" name="quantity">
     <label for="customer">suppliers</label>
-  
+
     <div class="customer__info">
         <div>
             <select  id="selected_customer" class="form-control" name="selected_supplier">
                 <option value="none" selected='selected'>--select--</option>
                 {% for read in suppliers%}
-                {% if read.name == items.supplier.convert_supplier_into_string%}
-                <option value="{{read.name}}" selected="selecetd">{{read.name}}</option>
-                {% else %}
-                <option value="{{read.name}}" >{{read.name}}</option>
-                {% endif %}
+                <option value="{{read.name}}">{{read.name}}</option>
                {% endfor %}
             </select>
         </div>
@@ -46,11 +44,12 @@
             
         </div>
     </div>
-    <input type="hidden" name="pk" value="{{items.pk}}">
+    
     <div class="return_product">
-        <button class="return_product_text">Update</button>
+        <button class="return_product_text">Create</button>
     </div>
-  </form>
-  <script>
+</form>
+<script>
    
-  </script>
+  
+</script>

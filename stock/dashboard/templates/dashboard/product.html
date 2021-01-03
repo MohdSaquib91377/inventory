@@ -1,7 +1,7 @@
 {% extends 'dashboard/main.html'%}
 {% block body%}
 
-<table class="table" id="tb">
+<table class="table" id="tb" style="width: 50%;">
     <tbody class="table__body">
         <thead class="table__heading">
             <tr>
@@ -12,53 +12,29 @@
                     Price
                 </th>
                 <th>
-                    Quantity
+                    Edit
                 </th>
                 <th>
-                    Supplier
+                    Delete
                 </th>
-                <th>
-                    Address
-                </th>
-                <th>
-                    contact 
-                </th>
-                <th>
-                    Edit</th>
-                
-                <th>Delete</th>
-            </tr>
-           
         </thead>
 
         {% for item in items%}
         <tr>
 
             <td>
-                {{item.product.title}}
+                {{item.title}}
                  </td>
                  <td>
-                    {{item.product.price}}
+                    {{item.price}}
                      </td>
-                     <td>
-                        {{item.quantity}}
-                         </td>
-                         <td>
-                            {{item.supplier.name}}
-                             </td>
-                             <td>
-                                 {{item.supplier.address}}
-                             </td>
-                             <td>
-                                 {{item.supplier.contact}}
-                             </td>
-                             <td>
+                            <td>
                                  <a href="#"  class="update" data-pk="{{item.pk}}" >
                                     Edit
                                  </a>
                              </td>
                              <td>
-                                 <span class="fa fa-arow" data-pk={{item.pk}}>Delete</span>
+                                 <a href="#" class="delete" data-pk={{item.pk}}>Delete</a>
                              </td>
         </tr>
         {% endfor %}
@@ -71,9 +47,25 @@
 </div> 
 
 
-<script>
+<script>    
  
-    $('.update').click(function(){
+   
+    
+    $(function(){
+
+        $('.delete').click(function(){
+    $.ajax({
+        url:'/dashboard/product/delete/',
+        type:'get',
+        data:{
+            'pk':$(this).attr('data-pk')
+        },
+        success:function(response){
+            console.log('deleted product')
+        }
+    })
+})
+$('.update').click(function(){
         console.log('update');
         $.ajax({
     url:'/dashboard/product/update/',
@@ -85,20 +77,11 @@
         document.getElementById('container__right').innerHTML=data.modal_for_updateProduct
         document.getElementById('product').value=data.data.title
         document.getElementById('price').value=data.data.price
-        document.getElementById('quantity').value=data.data.quantity
-        document.getElementById('supplier').value=data.data.supplier
-        document.getElementById('address').value=data.data.address
-        document.getElementById('contact').value=data.data.contact    
         document.getElementById('pk').value=data.data.pk   
     }
 })
-    })   
-  
-  var supplier='{{suppliers}}'
+    })  
 
-  console.log(supplier);
-    
-    // localStorage.setItem('data', suppliers);
-    
-</script>
+    })
+  </script>
 {% endblock %}

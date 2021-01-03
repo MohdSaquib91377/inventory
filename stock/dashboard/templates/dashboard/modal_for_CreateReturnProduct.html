@@ -1,59 +1,54 @@
+
 <div class="label_for_CU">
-    <p>Returns Product</p>
+  <p>Return Product</p>
 </div>
-<form action="{% url 'return'%}" method="POST" >
-    {% csrf_token %}
-<div class="form-group">  
-    <label for="product">Product Name</label>
-    <input type="text" name="product"  class="product form-control " id="product" >
-    <label for="price" class="price">Price</label>
-    <input type="text" name="price"  class="price form-control" id="price">
-    <label for="quantity" class="quantity">Quantity</label>
-    <input type="text" name="quantity"  class="quantity  form-control" id="quantity">
-    <label for="select_supplier">Suppliers</label>
-    <div class="suppliers">
-        <select  id="selected_supplier" class="form-control" name="selected_supplier">
-            <option value="none" selected='selected'>--select--</option>
-            {% for read in suppliers%}
-            <option value="{{read.name}}">{{read.name}}}</option>
-           {% endfor %}
-        </select>
-        
-    </div>
+<form action="{% url 'purchase_return' %}" method="POST">
+  {% csrf_token %}
+  <label for="product">product</label>
+  <div class="product__info">
+      <div class="supplier__info">
+       
+          <select  id="selected_product" class="form-control" name="selected_product">
+              <option value="none" selected='selected'>--select--</option>
+              {% for read in products%}
+              <option value="{{read.title}}">{{read.title}}</option>
+             {% endfor %}
+          </select>
     
-      <div class="new_supplier" id="new_supplier">
-        <button class="text" id="tag">Add Suppliers</button>
-    </div>
-      <div class="new_supplier_items">
-        <label for="suppliers">supplier</label>
-        <input type="text" name="supplier"  class="name form-control" id="supplier">
-        <label for="address" class="address">Address</label>
-        <input type="text" name="address"  class="address form-control " id="address">
-        <label for="contact" class="contact">Contact</label>
-        <input type="text" name="contact"  class="contact form-control " id="contact">
       </div>
-        <div class="return_product">
-            <button class="return_product_text">Return</button>
-        </div>
+     
+          
+      <div class="customer__add">
+          <a class="customer__text" href="{% url 'product'%}">+</a>
+          
+      </div>
      
     
+  </div>
+  <label for="quantity">quantity</label>
+  <input type="text" class="form-control" id="quantity" name="quantity">
+  <label for="customer">suppliers</label>
 
-</div>
-   
+  <div class="customer__info">
+      <div>
+          <select  id="selected_customer" class="form-control" name="selected_supplier">
+              <option value="none" selected='selected'>--select--</option>
+              {% for read in suppliers%}
+              <option value="{{read.name}}">{{read.name}}</option>
+             {% endfor %}
+          </select>
+      </div>
+     
+      <div class="customer__add">
+          <a class="customer__text" href="{% url 'suppliers'%}">+</a>
+          
+      </div>
+  </div>
+  
+  <div class="return_product">
+      <button class="return_product_text">Create</button>
+  </div>
 </form>
 <script>
-  $(function(){
-
-   $('.new_supplier_items').hide()
-  
-   $('#new_supplier').click(function(){
-       $('.new_supplier_items').show()
-       return false; 
-      
-   })
  
-
-})
-
-   
 </script>

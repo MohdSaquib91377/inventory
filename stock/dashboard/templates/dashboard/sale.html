@@ -59,7 +59,7 @@
                                  {{item.customer.email}}
                              </td>
                              <td>
-                                 <a href="#"  class="update" data-pk="{{item.pk}}" >
+                                 <a href="#"  class="update_sale" data-pk="{{item.pk}}" >
                                     Edit
                                  </a>
                              </td>
@@ -75,8 +75,25 @@
 {% include 'dashboard/modal_for_createSale.html'%}               
 </div> 
 
-
 <script>
- 
+ $(function(){
+     $('.update_sale').click(function(){
+       var pk=$(this).attr('data-pk')
+       console.log(pk);
+       $.ajax({
+           url:'/dashboard/sale/update/',
+           type:'get',
+           data:{
+               'pk':pk
+           },
+           dataType:'json',
+           success:function(response){
+               document.getElementById('container__right').innerHTML=response.modal_for_updateSale
+
+           }
+       })
+     })
+ })
 </script>
+
 {% endblock %}

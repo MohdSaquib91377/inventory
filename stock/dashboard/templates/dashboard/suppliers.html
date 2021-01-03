@@ -1,0 +1,76 @@
+{% extends 'dashboard/main.html'%}
+{% block body%}
+
+<table class="table" id="tb" style="width: 50%;">
+    <tbody class="table__body">
+        <thead class="table__heading">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Contact
+                </th>
+                <th>
+                    Address
+                </th>
+                <th>
+                    Edit
+                </th>
+                <th>
+                    Delete
+                </th>
+        </thead>
+
+        {% for item in items%}
+        <tr>
+
+            <td>
+                {{item.name}}
+                 </td>
+                 <td>
+                    {{item.contact}}
+                     </td>
+                     <td>
+                         {{item.address}}
+                     </td>
+                            <td>
+                                 <a href="#"  class="update_supplier" data-pk="{{item.pk}}" >
+                                    Edit
+                                 </a>
+                             </td>
+                             <td>
+                                 <a href="#" class="delete" data-pk={{item.pk}}>Delete</a>
+                             </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div  class="container__right" id="container__right">
+                    
+    {% include 'dashboard/modal_for_createSupplier.html'%}
+               
+</div> 
+
+
+<script>    
+ 
+ $(function(){
+     $('.update_supplier').click(function(){
+        var pk=$(this).attr('data-pk')
+        console.log(pk);
+        $.ajax({
+            url:'/dashboard/supplier/update/',
+            type:'get',
+            data:{'pk':pk},
+            dataType:'json',
+            success:function(response){
+                document.getElementById('container__right').innerHTML=response.modal_for_updateSupplier
+
+            }
+        })
+
+     })
+ })
+  </script>
+{% endblock %}

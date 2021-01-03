@@ -15,13 +15,16 @@
                     Quantity
                 </th>
                 <th>
-                    Supplier
+                    Customer
                 </th>
                 <th>
                     Address
                 </th>
                 <th>
-                    contact 
+                    Contact 
+                </th>
+                <th>
+                    Email
                 </th>
                 <th>
                     Edit</th>
@@ -31,7 +34,7 @@
            
         </thead>
 
-        {% for item in items%}
+        {% for item in salesReturn%}
         <tr>
 
             <td>
@@ -44,16 +47,19 @@
                         {{item.quantity}}
                          </td>
                          <td>
-                            {{item.supplier.name}}
+                            {{item.customer.name}}
                              </td>
                              <td>
-                                 {{item.supplier.address}}
+                                 {{item.customer.address}}
                              </td>
                              <td>
-                                 {{item.supplier.contact}}
+                                 {{item.customer.contact}}
                              </td>
                              <td>
-                                 <a href="#"  class="update_return" data-pk="{{item.pk}}" >
+                                 {{item.customer.email}}
+                             </td>
+                             <td>
+                                 <a href="#"  class="update_sale_return" data-pk="{{item.pk}}" >
                                     Edit
                                  </a>
                              </td>
@@ -64,25 +70,27 @@
         {% endfor %}
     </tbody>
 </table>
-    
 <div  class="container__right" id="container__right">
-                    
-    {% include 'dashboard/modal_for_CreateReturnProduct.html'%}
-               
+
+{% include 'dashboard/modal_for_salesReturn.html'%}               
 </div> 
 <script>
-    $('.update_return').click(function(){
+$(function(){
+    $('.update_sale_return').click(function(){
+        var pk=$(this).attr('data-pk')
         $.ajax({
-    url:'/dashboard/product/return/update',
-    type:'get',
-    data:{'id':$(this).attr('data-pk')},
-    dataType:'json',
-    success:function(data){
-        document.getElementById('container__right').innerHTML=data.modal_for_UpdateReturnProduct
-    
-    }
-})
-    })
-</script>
+            url:'/dashboard/sales/return/update/',
+            type:'get',
+            data:{
+                'pk':pk
+            },
+            dataType:'json',
+            success:function(response){
+                document.getElementById('container__right').innerHTML=response.modal_for_updateSaleReturn
 
+            }
+        })
+    })
+})
+</script>
 {% endblock %}

@@ -1,8 +1,8 @@
 
 <div class="label_for_CU">
-    <p>Create Sale</p>
+    <p>Sale Returns</p>
 </div>
-<form action="{% url 'sale' %}" method="POST">
+<form action="{% url 'salesReturn' %}" method="POST">
     {% csrf_token %}
     <label for="product">product</label>
     <select  id="selected_product" class="form-control" name="selected_product">
@@ -15,21 +15,16 @@
     <input type="text" class="form-control" id="quantity" name="quantity">
     <label for="customer">customer</label>
 
-    <div class="customer__info">
-        <div>
+   
+     
             <select  id="selected_customer" class="form-control" name="selected_customer">
                 <option value="none" selected='selected'>--select--</option>
                 {% for read in customers%}
                 <option value="{{read.name}}">{{read.name}}</option>
                {% endfor %}
             </select>
-        </div>
-       
-        <div class="customer__add">
-            <a class="customer__text" href="{% url 'customers'%}">+</a>
-            
-        </div>
-    </div>
+    
+   
     
     <div class="return_product">
         <button class="return_product_text">Create</button>
